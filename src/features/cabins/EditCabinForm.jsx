@@ -7,7 +7,7 @@ import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import FormRow from "../../ui/FormRow";
 
-function EditCabinForm({ cabinToEdit }) {
+function EditCabinForm({ cabinToEdit, onCloseModal }) {
     const { id, ...editValues } = cabinToEdit;
     const { editCabin, isEditing } = useEditCabin();
     const { register, handleSubmit, reset, getValues, formState } = useForm({
@@ -21,7 +21,10 @@ function EditCabinForm({ cabinToEdit }) {
         editCabin(
             { updatedCabin: { ...data, image }, id },
             {
-                onSuccess: reset
+                onSuccess: () => {
+                    reset();
+                    onCloseModal?.();
+                }
             }
         );
     }
@@ -119,7 +122,11 @@ function EditCabinForm({ cabinToEdit }) {
             </FormRow>
 
             <FormRow>
-                <Button variation="secondary" type="reset" disabled={isEditing}>
+                <Button
+                    variation="secondary"
+                    type="reset"
+                    onClick={() => onCloseModal?.()}
+                >
                     Cancel
                 </Button>
                 <Button disabled={isEditing}>Update cabin info</Button>

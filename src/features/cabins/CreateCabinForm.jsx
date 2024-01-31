@@ -7,14 +7,17 @@ import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import FormRow from "../../ui/FormRow";
 
-function CreateCabinForm() {
+function CreateCabinForm({ onCloseModal }) {
     const { createCabin, isCreating } = useCreateCabin();
     const { register, handleSubmit, reset, getValues, formState } = useForm();
     const { errors } = formState;
 
     function onSubmit(data) {
         createCabin(data, {
-            onSuccess: reset
+            onSuccess: () => {
+                reset();
+                onCloseModal?.();
+            }
         });
     }
 
@@ -23,7 +26,10 @@ function CreateCabinForm() {
     }
 
     return (
-        <Form onSubmit={handleSubmit(onSubmit, onInvalid)}>
+        <Form
+            onSubmit={handleSubmit(onSubmit, onInvalid)}
+            type={onCloseModal ? "modal" : "regular"}
+        >
             <FormRow label="Cabin name" error={errors?.name?.message}>
                 <Input
                     type="text"
@@ -116,7 +122,7 @@ function CreateCabinForm() {
                 <Button
                     variation="secondary"
                     type="reset"
-                    disabled={isCreating}
+                    onClick={() => onCloseModal?.()}
                 >
                     Cancel
                 </Button>
