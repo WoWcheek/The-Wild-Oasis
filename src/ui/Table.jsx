@@ -21,6 +21,8 @@ const StyledHeader = styled(CommonRow)`
     padding: 1.6rem 2.4rem;
 
     background-color: var(--color-grey-50);
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
     border-bottom: 1px solid var(--color-grey-100);
     text-transform: uppercase;
     letter-spacing: 0.4px;
@@ -87,7 +89,7 @@ function Row({ children }) {
 }
 
 function Body({ items, render }) {
-    if (!items?.length) return <Empty>No data to show yet</Empty>;
+    if (!items?.length) return <Empty>No data to display</Empty>;
     return <StyledBody>{items.map(render)}</StyledBody>;
 }
 
