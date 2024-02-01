@@ -18,9 +18,11 @@ export async function getCabins() {
 }
 
 export async function createCabin(newCabin) {
-    const imageName = composeImageName(newCabin.image[0].name);
-    const imagePath = composeImagePath(imageName);
-    console.log(imageName);
+    const hasImagePath = newCabin.image?.startsWith?.(supabaseUrl);
+    const imageName = composeImageName(newCabin.image[0]?.name);
+    const imagePath = hasImagePath
+        ? newCabin.image
+        : composeImagePath(imageName);
 
     const { data, error } = await supabase
         .from("cabins")
