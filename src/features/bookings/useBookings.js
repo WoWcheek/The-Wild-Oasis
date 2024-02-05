@@ -22,7 +22,7 @@ export function useBookings() {
         : Number(searchParams.get("page"));
 
     const {
-        isLoading,
+        isPending,
         data: { data: bookings, count } = {},
         error
     } = useQuery({
@@ -45,5 +45,5 @@ export function useBookings() {
         });
     }
 
-    return { isLoading, bookings, count, error };
+    return { isPending, bookings, count, error };
 }

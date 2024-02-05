@@ -3,7 +3,7 @@ import { getCabins } from "../../services/apiCabins";
 
 export function useCabins() {
     const {
-        isLoading,
+        isPending,
         data: cabins,
         error
     } = useQuery({
@@ -11,5 +11,5 @@ export function useCabins() {
         queryFn: getCabins
     });
 
-    return { isLoading, cabins, error };
+    return { isPending, cabins, error };
 }

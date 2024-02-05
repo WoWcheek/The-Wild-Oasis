@@ -6,7 +6,7 @@ import Input from "../../ui/Input";
 import Spinner from "../../ui/Spinner";
 
 function UpdateSettingsForm() {
-    const { isLoading, settings = {} } = useSettings();
+    const { isPending, settings = {} } = useSettings();
     const {
         min_booking_length,
         max_booking_length,
@@ -15,7 +15,7 @@ function UpdateSettingsForm() {
     } = settings;
     const { updateSetting, isUpdating } = useUpdateSetting();
 
-    if (isLoading) return <Spinner />;
+    if (isPending) return <Spinner />;
 
     function handleUpdate(e, settingName) {
         if (!e.target.value) return;
@@ -30,7 +30,7 @@ function UpdateSettingsForm() {
                     type="number"
                     id="min-nights"
                     defaultValue={min_booking_length}
-                    disabled={isLoading || isUpdating}
+                    disabled={isPending || isUpdating}
                     onBlur={(e) => handleUpdate(e, "min_booking_length")}
                 />
             </FormRow>
@@ -39,7 +39,7 @@ function UpdateSettingsForm() {
                     type="number"
                     id="max-nights"
                     defaultValue={max_booking_length}
-                    disabled={isLoading || isUpdating}
+                    disabled={isPending || isUpdating}
                     onBlur={(e) => handleUpdate(e, "max_booking_length")}
                 />
             </FormRow>
@@ -48,7 +48,7 @@ function UpdateSettingsForm() {
                     type="number"
                     id="max-guests"
                     defaultValue={max_guests_per_booking}
-                    disabled={isLoading || isUpdating}
+                    disabled={isPending || isUpdating}
                     onBlur={(e) => handleUpdate(e, "max_guests_per_booking")}
                 />
             </FormRow>
@@ -57,7 +57,7 @@ function UpdateSettingsForm() {
                     type="number"
                     id="breakfast-price"
                     defaultValue={breakfast_price}
-                    disabled={isLoading || isUpdating}
+                    disabled={isPending || isUpdating}
                     onBlur={(e) => handleUpdate(e, "breakfast_price")}
                 />
             </FormRow>

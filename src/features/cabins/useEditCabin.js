@@ -5,7 +5,7 @@ import { editCabin as editCabinApi } from "../../services/apiCabins";
 export function useEditCabin() {
     const queryClient = useQueryClient();
 
-    const { mutate: editCabin, isLoading: isEditing } = useMutation({
+    const { mutate: editCabin, isPending: isEditing } = useMutation({
         mutationFn: ({ updatedCabin, id }) => editCabinApi(updatedCabin, id),
         onSuccess: () => {
             queryClient.invalidateQueries("cabins");
