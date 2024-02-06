@@ -18,7 +18,7 @@ import { guests } from "./data-guests";
 
 const StyledUploader = styled.div`
     margin-top: auto;
-    background-color: #e0e7ff;
+    background-color: var(--color-indigo-100);
     padding: 8px;
     border-radius: 5px;
     text-align: center;
