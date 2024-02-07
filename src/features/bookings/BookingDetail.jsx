@@ -8,6 +8,7 @@ import { useBooking } from "./useBooking";
 import Row from "../../ui/Row";
 import Tag from "../../ui/Tag";
 import Modal from "../../ui/Modal";
+import Empty from "../../ui/Empty";
 import Button from "../../ui/Button";
 import Spinner from "../../ui/Spinner";
 import Heading from "../../ui/Heading";
@@ -30,6 +31,7 @@ function BookingDetail() {
     const moveBack = useMoveBack();
 
     if (isPending) return <Spinner />;
+    if (!booking) return <Empty resourceName="booking" />;
 
     const { id, status } = booking;
 
